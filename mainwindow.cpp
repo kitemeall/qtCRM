@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "groupform.h"
+#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -32,5 +33,12 @@ void MainWindow::on_webView_urlChanged(const QUrl &url)
         emit gotUser(userId, token);
         this->hide();
 
+    }
+    else if(urlString.contains("error")){
+        QMessageBox::information(
+            this,
+            tr("Authentication cancelled"),
+            tr("You cancelled authentication") );
+        this->close();
     }
 }

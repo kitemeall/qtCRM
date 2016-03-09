@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    groupform.cpp
+    groupform.cpp \
+    json.cpp
 
 HEADERS  += mainwindow.h \
-    groupform.h
+    groupform.h \
+    json.h
 
 FORMS    += mainwindow.ui \
     groupform.ui

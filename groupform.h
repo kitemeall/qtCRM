@@ -22,6 +22,7 @@ public slots:
 private:
     Ui::GroupForm *ui;
     QByteArray GET(QUrl query);
+    void setGroupsView(QVariantList list);
 };
 
 #endif // GROUPFORM_H
