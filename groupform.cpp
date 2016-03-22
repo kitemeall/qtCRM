@@ -63,11 +63,12 @@ QByteArray GroupForm::GET(QUrl query){
 
 }
 void GroupForm::setGroupsView(QVariantList list){
-    QStandardItemModel * model = new QStandardItemModel(list.size(), 2, this);
+    QStandardItemModel * model = new QStandardItemModel(list.size(), 3, this);
     QStringList headerLabels;
     headerLabels.append("id");
     headerLabels.append("Group name");
     model->setHorizontalHeaderLabels(headerLabels);
+
     for(int row = 0; row < list.size(); row++){
         QVariantMap map = list.value(row).toMap();
 
@@ -80,7 +81,35 @@ void GroupForm::setGroupsView(QVariantList list){
         model->setData(index,groupName);
 
 
+        QVariant photoUrl = map.find("photo_50").value();
+        QVariant groupImage = loadImageFromUrl(photoUrl.toString());
+        index = model->index(row, 2);
+        model->setData(index,groupImage,Qt::DecorationRole);
+
     }
     ui->tableView->setModel(model);
+    ui->tableView->resizeRowsToContents();
+    ui->tableView->resizeRowsToContents();
 
 }
+
+QVariant GroupForm::loadImageFromUrl(QString stringUrl){
+    QUrl url(stringUrl);
+    QByteArray imgBytes = GET(url);
+
+    QPixmap p;
+
+    // fill array with image
+    p.loadFromData(imgBytes,"JPEG");
+    QVariant image (p);
+    return image;
+
+
+}
+
+
+
+
+
+
+

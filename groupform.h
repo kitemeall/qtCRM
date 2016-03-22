@@ -23,6 +23,7 @@ private:
     Ui::GroupForm *ui;
     QByteArray GET(QUrl query);
     void setGroupsView(QVariantList list);
+    QVariant loadImageFromUrl(QString stringUrl);
 };
 
 #endif // GROUPFORM_H
